@@ -1,0 +1,21 @@
+{
+  "compilerOptions": {
+    "baseUrl": ".",
+    "paths": {
+      "@/*": ["apps/web/src/*"],
+
+      "@store": ["packages/store/src/index.ts"],
+      "@store/*": ["packages/store/src/*"],
+
+      "@api": ["packages/api/index.ts"],
+      "@api/*": ["packages/api/*"],
+
+      "@hooks": ["packages/hooks/index.ts"],
+      "@hooks/*": ["packages/hooks/*"],
+    },
+    "jsx": "react-jsx",
+    "moduleResolution": "node",
+    "esModuleInterop": true,
+    "skipLibCheck": true
+  }
+}

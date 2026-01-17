@@ -1,0 +1,33 @@
+@import "tailwindcss";
+
+body {
+  background: var(--background);
+  color: var(--foreground);
+  font-family: Arial, Helvetica, sans-serif;
+}
+/* Background */
+.login-bg {
+  background-color: var(--bs-body-bg);
+}
+
+/* Card */
+.login-card {
+  max-width: 960px;
+  background-color: var(--bs-body-bg);
+}
+
+/* Left panel */
+.login-left {
+  background: linear-gradient(180deg, #4f46e5, #7c3aed);
+  color: #fff;
+}
+
+/* Dark tweaks */
+[data-bs-theme="dark"] .input-group-text {
+  background-color: #2b3035;
+  border-color: #495057;
+}
+
+[data-bs-theme="dark"] .login-card {
+  background-color: #212529;
+}

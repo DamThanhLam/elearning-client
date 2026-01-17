@@ -1,0 +1,41 @@
+{
+  "brand_name": "Nền tảng Giáo dục",
+  "brand_tagline": "Học thông minh, phát triển bền vững",
+
+  "welcome_back": "Chào mừng quay trở lại",
+  "login_page": {
+    "subtitle": "Đăng nhập để tiếp tục hành trình học tập của bạn"
+  },
+
+  "sign_in": "Đăng nhập",
+  "sign_up": "Đăng ký",
+  "forgot_password": "Quên mật khẩu?",
+  "dont_have_account": "Chưa có tài khoản?",
+  "or_continue_with": "Hoặc đăng nhập bằng",
+
+  "common": {
+    "loading": "Đang xử lý..."
+  },
+
+  "theme": {
+    "light": "Chuyển sang giao diện sáng",
+    "dark": "Chuyển sang giao diện tối"
+  },
+
+  "auth": {
+    "welcome_text": "Vui lòng nhập thông tin để truy cập tài khoản",
+    "email": "Email",
+    "email_placeholder": "Nhập email của bạn",
+    "password": "Mật khẩu",
+    "password_placeholder": "Nhập mật khẩu",
+    "remember_me": "Ghi nhớ đăng nhập",
+    "login_failed": "Đăng nhập thất bại. Vui lòng thử lại.",
+
+    "errors": {
+      "email_required": "Vui lòng nhập email",
+      "email_invalid": "Email không hợp lệ",
+      "password_required": "Vui lòng nhập mật khẩu",
+      "password_min": "Mật khẩu phải có ít nhất 6 ký tự"
+    }
+  }
+}
