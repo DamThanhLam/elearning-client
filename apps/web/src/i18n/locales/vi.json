@@ -1,41 +1,79 @@
 {
-  "brand_name": "Nền tảng Giáo dục",
-  "brand_tagline": "Học thông minh, phát triển bền vững",
+  "brand_name": "Edu Platform",
+  "brand_tagline": "Học thông minh hơn, phát triển nhanh hơn",
+  "welcome_back": "Chào mừng bạn quay lại",
 
-  "welcome_back": "Chào mừng quay trở lại",
   "login_page": {
-    "subtitle": "Đăng nhập để tiếp tục hành trình học tập của bạn"
+    "subtitle": "Đăng nhập để tiếp tục học tập cùng chúng tôi"
   },
 
   "sign_in": "Đăng nhập",
   "sign_up": "Đăng ký",
   "forgot_password": "Quên mật khẩu?",
   "dont_have_account": "Chưa có tài khoản?",
-  "or_continue_with": "Hoặc đăng nhập bằng",
+  "already_have_account": "Đã có tài khoản?",
+  "or_continue_with": "Hoặc tiếp tục với",
 
   "common": {
-    "loading": "Đang xử lý..."
+    "loading": "Đang tải...",
+    "success": "Thành công",
+    "error_occurred": "Đã xảy ra lỗi, vui lòng thử lại",
+    "creating": "Đang tạo..."
   },
 
   "theme": {
-    "light": "Chuyển sang giao diện sáng",
-    "dark": "Chuyển sang giao diện tối"
+    "light": "Chuyển sang chế độ sáng",
+    "dark": "Chuyển sang chế độ tối"
   },
 
   "auth": {
     "welcome_text": "Vui lòng nhập thông tin để truy cập tài khoản",
-    "email": "Email",
+    "register_subtitle": "Tạo tài khoản để bắt đầu học tập và giảng dạy",
+
+    "display_name": "Tên hiển thị",
+    "display_name_placeholder": "Nhập họ và tên",
+
+    "email": "Địa chỉ email",
     "email_placeholder": "Nhập email của bạn",
+
+    "phone": "Số điện thoại",
+    "phone_placeholder": "+84 9xx xxx xxx",
+
+    "role": "Vai trò",
+    "teacher": "Giảng viên",
+    "student": "Học viên",
+
+    "role_teacher_desc": "Tạo khóa học, quản lý học viên và nội dung giảng dạy",
+    "role_student_desc": "Tham gia khóa học và theo dõi tiến độ học tập",
+
     "password": "Mật khẩu",
     "password_placeholder": "Nhập mật khẩu",
+
+    "confirm_password": "Xác nhận mật khẩu",
+    "confirm_password_placeholder": "Nhập lại mật khẩu",
+
     "remember_me": "Ghi nhớ đăng nhập",
     "login_failed": "Đăng nhập thất bại. Vui lòng thử lại.",
 
+    "create_account": "Tạo tài khoản",
+    "register_success_title": "Đăng ký thành công",
+    "register_success_message": "Tài khoản của bạn đã được tạo thành công. Bạn có thể đăng nhập ngay bây giờ.",
+
     "errors": {
-      "email_required": "Vui lòng nhập email",
+      "display_name_required": "Tên hiển thị là bắt buộc",
+
+      "email_required": "Email là bắt buộc",
       "email_invalid": "Email không hợp lệ",
-      "password_required": "Vui lòng nhập mật khẩu",
-      "password_min": "Mật khẩu phải có ít nhất 6 ký tự"
+
+      "phone_required": "Số điện thoại là bắt buộc",
+      "phone_invalid": "Số điện thoại không hợp lệ",
+
+      "role_required": "Vui lòng chọn vai trò",
+
+      "password_required": "Mật khẩu là bắt buộc",
+      "password_min": "Mật khẩu phải có ít nhất 8 ký tự",
+
+      "password_confirm_invalid": "Mật khẩu xác nhận không khớp"
     }
   }
 }

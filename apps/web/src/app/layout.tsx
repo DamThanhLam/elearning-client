@@ -1,14 +1,16 @@
 'use client';
 import "@/i18n";
+import "bootstrap/dist/css/bootstrap.min.css";
+import 'bootstrap-icons/font/bootstrap-icons.css';
 
 import { Provider } from "react-redux";
 import "./globals.css";
 import { store } from "@store";
 import useTheme from "@hooks/useTheme";
-import "bootstrap/dist/css/bootstrap.min.css";
 import { useTranslation } from "react-i18next";
 import { Moon, Sun } from "lucide-react";
 import { useEffect, useState } from "react";
+import { ModalNotificationProvider } from "@hooks";
 
 export default function RootLayout({
   children,
@@ -52,7 +54,11 @@ export default function RootLayout({
           </select>
         </div>
 
-        <Provider store={store}>{children}</Provider>
+        <Provider store={store}>
+          <ModalNotificationProvider>
+            {children}
+          </ModalNotificationProvider>
+        </Provider>
       </body>
     </html>
   );

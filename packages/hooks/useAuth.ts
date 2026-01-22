@@ -5,6 +5,8 @@ import { logout as logoutSlice } from "@store";
 import { authApi } from "@api"; 
 import { loginThunk } from "@store/thunks/auth.thunk";
 import { useAppDispatch } from "./useAppDispatch";
+import { RegisterUserPayload } from "packages/types/UserType";
+import { setActiveRole } from "@store/slices/auth.slice";
 
 export const useAuth = () => {
     const dispatch = useAppDispatch();
@@ -21,6 +23,9 @@ export const useAuth = () => {
         });
 
     }
-    
-    return { ...auth, logout, login };
+
+    const signUp = (data: RegisterUserPayload) => {
+        return authApi.signUp(data);
+    }
+    return { ...auth, logout, login, signUp, setActiveRole };
 };

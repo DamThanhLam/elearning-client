@@ -1,16 +1,20 @@
 
 export type ModelNotificationParams = {
-    buttons: ("YES" | "NO" | "CANCEL")[];
+    buttons: Button[];
     title: string;
     content: string;
+    type: "success" | "error" | "info" | "warning";
 }
 export type ModelNotificationProps = {
     visible: boolean;
     params: ModelNotificationParams;
-    onPress: (button: "YES" | "NO" | "CANCEL") => void;
-    onClose: () => void;
+}
+export type Button = {
+    type: "YES" | "NO" | "CANCEL" | "CLOSE";
+    onPress: () => void;
 }
 export type ModelNotificationContextType = {
     modalProps: ModelNotificationProps;
     setModalProps: React.Dispatch<React.SetStateAction<ModelNotificationProps>>;
+    buttonClose: Button;
 }

@@ -23,7 +23,7 @@ const LoginPage: React.FC = () => {
 
   useEffect(() => {
     if (user) router.push("/dashboard");
-  }, [user, router]);
+  }, [user]);
 
   useEffect(() => {
     if (error) {
@@ -31,7 +31,7 @@ const LoginPage: React.FC = () => {
         general: typeof error === "string" ? error : t("auth.login_failed"),
       });
     }
-  }, [error, t]);
+  }, [error]);
 
   const validateHandleLogin = () => {
     const next: typeof errors = {};
@@ -175,7 +175,7 @@ const LoginPage: React.FC = () => {
 
             <p className="text-center mt-3 text-secondary">
               {t("dont_have_account")}{" "}
-              <Link href="/register" className="fw-semibold text-decoration-none">
+              <Link href="/sign-up" className="fw-semibold text-decoration-none">
                 {t("sign_up")}
               </Link>
             </p>

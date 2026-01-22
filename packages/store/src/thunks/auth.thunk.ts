@@ -1,3 +1,4 @@
+import { RegisterUserPayload } from "packages/types/UserType";
 import { authApi } from "@api";
 import { createAsyncThunk } from "@reduxjs/toolkit";
 

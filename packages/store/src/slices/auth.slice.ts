@@ -1,10 +1,12 @@
 'use client';
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 import { loginThunk } from "../thunks/auth.thunk";
+import { UserRole } from "packages/types/UserType";
 
 type AuthState = {
     token: string | null;
-    user?: { id: string; name: string };
+    user?: { id: string; name: string; role: UserRole[] };
+    activeRole?: UserRole;
     loading?: boolean;
     error?: String;
 };
@@ -22,6 +24,9 @@ const authSlice = createSlice({
         },
         logout(state) {
             return initialState;
+        },
+        setActiveRole(state, action: PayloadAction<UserRole>) {
+            state.activeRole = action.payload;
         }
     },
     extraReducers: (builder) => {
@@ -38,8 +43,8 @@ const authSlice = createSlice({
             .addCase(loginThunk.rejected, (state, action) => {
                 state.loading = false;
                 state.error = action.payload as string;
-            });
+            })
     }
 });
-export const { setAuth, logout } = authSlice.actions;
+export const { setAuth, logout, setActiveRole } = authSlice.actions;
 export default authSlice.reducer;
