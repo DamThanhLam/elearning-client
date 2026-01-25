@@ -75,5 +75,47 @@
 
       "password_confirm_invalid": "Passwords do not match"
     }
-  }
+  },
+   "forgot_password_page": {
+    "title": "Reset password",
+    "subtitle": "Enter your email to receive a verification code"
+  },
+
+  "reset_password": "Reset password",
+  "enter_email_to_receive_otp": "Enter your email to receive a verification code",
+
+  "email": "Email address",
+  "enter_email": "Enter your email",
+
+  "send_otp": "Send verification code",
+  "sending": "Sending...",
+  "we_will_send_otp_to_your_email": "We will send a verification code to your email",
+
+  "otp": "Verification code",
+  "enter_otp": "Enter verification code",
+  "otp_has_been_sent_to": "A verification code has been sent to",
+
+  "resend": "Resend code",
+
+  "new_password": "New password",
+  "enter_new_password": "Enter new password",
+
+  "confirm_new_password": "Confirm new password",
+
+  "confirm_and_reset": "Confirm & reset password",
+  "back": "Back",
+
+  "strength": "Strength",
+  "chars": "chars",
+
+  "show_password": "Show password",
+  "hide_password": "Hide password",
+
+  "please_enter_email": "Please enter your email address",
+  "please_enter_otp": "Please enter the verification code",
+
+  "password_must_be_at_least_8_characters_long": "Password must be at least 8 characters long",
+  "confirmation_password_does_not_match": "Confirmation password does not match",
+
+  "invalid": "Invalid information. Please try again."
 }

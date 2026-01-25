@@ -27,5 +27,11 @@ export const useAuth = () => {
     const signUp = (data: RegisterUserPayload) => {
         return authApi.signUp(data);
     }
-    return { ...auth, logout, login, signUp, setActiveRole };
+    const sendOtp = (email: string) => {
+        return authApi.sendOtp(email);
+    }
+    const resetPassword = (email: string, otp: string, newPassword: string) => {
+        return authApi.resetPassword(email, otp, newPassword);
+    }
+    return { ...auth, logout, login, signUp, setActiveRole, sendOtp, resetPassword };
 };
