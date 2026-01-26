@@ -8,6 +8,14 @@ const useTheme = () => {
     const toggleTheme = () => {
         setTheme((prevTheme) => (prevTheme === 'light' ? 'dark' : 'light'));
     };
+
+    useEffect(() => {
+        const savedTheme = localStorage.getItem("theme") as "light" | "dark" | null;
+        if (savedTheme) {
+            setTheme(savedTheme);
+        }
+    }, []);
+    
     useEffect(() => {
         localStorage.setItem("theme", theme);
     }, [theme]);

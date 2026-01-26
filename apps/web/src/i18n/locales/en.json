@@ -13,6 +13,12 @@
   "dont_have_account": "Don't have an account?",
   "already_have_account": "Already have an account?",
   "or_continue_with": "Or continue with",
+  "teacher": "Giảng viên",
+  "home": "Trang chủ",
+  "classes": "Lớp học",
+  "notifications": "Thông báo",
+  "settings": "Cài đặt",
+  "logout": "Đăng xuất",
 
   "common": {
     "loading": "Loading...",
@@ -117,5 +123,18 @@
   "password_must_be_at_least_8_characters_long": "Password must be at least 8 characters long",
   "confirmation_password_does_not_match": "Confirmation password does not match",
 
-  "invalid": "Invalid information. Please try again."
+  "invalid": "Invalid information. Please try again.",
+  "slogan_revolutionizing_education": "Cách mạng hóa giáo dục số",
+  "products": "Sản phẩm",
+  "features": "Tính năng",
+  "integration": "Tích hợp",
+  "api": "API",
+  "support": "Hỗ trợ",
+  "documentation": "Tài liệu",
+  "help_center": "Trung tâm trợ giúp",
+  "help": "Trợ giúp",
+  "contact": "Liên hệ",
+  "email_company_value": "support@gradeflow.io",
+  "phone_number_company_value": "+84 123 456 789",
+  "copyright": "© 2026 GradeFlow. All rights reserved."
 }

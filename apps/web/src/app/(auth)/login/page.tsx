@@ -22,7 +22,7 @@ const LoginPage: React.FC = () => {
   }>({});
 
   useEffect(() => {
-    if (user) router.push("/dashboard");
+    if (user) router.push("/");
   }, [user]);
 
   useEffect(() => {
@@ -142,13 +142,7 @@ const LoginPage: React.FC = () => {
                 )}
               </div>
 
-              <div className="d-flex justify-content-between align-items-center mb-3">
-                <div className="form-check">
-                  <input className="form-check-input" type="checkbox" id="remember" />
-                  <label className="form-check-label" htmlFor="remember">
-                    {t("auth.remember_me")}
-                  </label>
-                </div>
+              <div className="d-flex justify-content-end align-items-center mb-3">
                 <Link href="/forgot-password" className="text-decoration-none">
                   {t("forgot_password")}
                 </Link>

@@ -9,11 +9,13 @@ import { useTranslation } from "react-i18next";
 export default function Index() {
   const { user, setActiveRole } = useAuth();
   const router = useRouter();
-   const { t } = useTranslation();
+  const { t } = useTranslation();
+
 
   useEffect(() => {
-    if (user && user.role.length == 1 ) {
-      router.push("/" + user.role[0].toLowerCase());
+    if (user && user.roles.length == 1 ) {
+      setActiveRole(user.roles[0]);
+      router.push("/" + user.roles[0].toLowerCase());
     } else if (!user) {
       router.push("/login");
     }

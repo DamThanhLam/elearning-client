@@ -2,17 +2,17 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 import { loginThunk } from "../thunks/auth.thunk";
 import { UserRole } from "packages/types/UserType";
+import { getUserInformationThunk } from "@store/thunks/user.thunk";
 
 type AuthState = {
-    token: string | null;
-    user?: { id: string; name: string; role: UserRole[] };
+    user?: { name: string; roles: UserRole[] };
     activeRole?: UserRole;
     loading?: boolean;
     error?: String;
 };
 
 const initialState: AuthState = {
-    token: null
+    user: null
 };
 
 const authSlice = createSlice({
@@ -37,10 +37,21 @@ const authSlice = createSlice({
             })
             .addCase(loginThunk.fulfilled, (state, action) => {
                 state.loading = false;
-                state.token = action.payload.token;
-                state.user = action.payload.user;
+                state.user = action.payload;
             })
             .addCase(loginThunk.rejected, (state, action) => {
+                state.loading = false;
+                state.error = action.payload as string;
+            })
+            .addCase(getUserInformationThunk.pending, (state) => {
+                state.loading = true;
+                state.error = undefined;
+            })
+            .addCase(getUserInformationThunk.fulfilled, (state, action) => {
+                state.loading = false;
+                state.user = action.payload;
+            })
+            .addCase(getUserInformationThunk.rejected, (state, action) => {
                 state.loading = false;
                 state.error = action.payload as string;
             })
