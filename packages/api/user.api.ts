@@ -2,5 +2,5 @@ import { api } from "./api";
 
 export const userApi = {
     getUserInformation: async () => 
-        api.get('/users/information')
+        api.get('/users/api/v1/users/information')
 }

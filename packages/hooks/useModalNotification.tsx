@@ -1,6 +1,6 @@
 'use client';
 import ModalNotification from "@/components/ModalNotification";
-import { ModelNotificationContextType, ModelNotificationProps } from "packages/types/modal";
+import { ModelNotificationContextType, ModelNotificationProps } from "packages/types/ModelNotification";
 import React, { createContext, useState } from "react";
 
 const initialModalProps: ModelNotificationProps = {

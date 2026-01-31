@@ -6,7 +6,7 @@ const layout: React.FC<Readonly<{children: React.ReactNode}>> = ({ children }) =
         <>
             <div className="d-flex">
                 <TeacherSidebar/>
-                <div className="p-2">
+                <div className="p-2 flex-grow-1">
                     {children}
                 </div>
             </div>

@@ -7,7 +7,7 @@ import { useTranslation } from "react-i18next";
 import { Eye, EyeOff } from "lucide-react";
 
 import { useAuth, useModalNotification } from "@hooks";
-import { UserRole } from "packages/types/UserType";
+import { UserRole } from "packages/types/User";
 
 const SignUpPage: React.FC = () => {
   const router = useRouter();

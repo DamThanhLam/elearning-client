@@ -1,15 +1,6 @@
-export type User = {
+export type UserInformation = {
   id: string;
   displayName: string;
-  email: string;
-  emailVerified: boolean;
-  phone?: string;
-  phoneVerified: boolean;
-  roles: UserRole[];
-  password?: string;
-  status: UserStatus;
-  createdAt: string;
-  updatedAt: string;
 };
 
 export type RegisterUserPayload = {

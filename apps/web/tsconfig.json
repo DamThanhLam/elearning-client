@@ -28,6 +28,6 @@
     ".next/dev/types/**/*.ts",
     "**/*.mts",
     "src/**/*"
-, "../../packages/types/UserType.ts"  ],
+, "../../packages/types/User.ts"  ],
   "exclude": ["node_modules"]
 }

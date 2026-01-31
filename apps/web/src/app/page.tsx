@@ -2,7 +2,7 @@
 import { useEffect } from "react";
 import { useAuth } from "@hooks";
 import { useRouter } from "next/navigation";
-import { UserRole } from "packages/types/UserType";
+import { UserRole } from "packages/types/User";
 import RoleCard from "@/components/cards/RoleCard";
 import { useTranslation } from "react-i18next";
 

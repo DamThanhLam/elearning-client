@@ -5,7 +5,7 @@ import { logout as logoutSlice } from "@store";
 import { authApi } from "@api"; 
 import { loginThunk } from "@store/thunks/auth.thunk";
 import { useAppDispatch } from "./useAppDispatch";
-import { RegisterUserPayload } from "packages/types/UserType";
+import { RegisterUserPayload } from "packages/types/User";
 import { setActiveRole } from "@store/slices/auth.slice";
 import { getUserInformationThunk } from "@store/thunks/user.thunk";
 

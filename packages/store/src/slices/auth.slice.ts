@@ -1,7 +1,7 @@
 'use client';
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 import { loginThunk } from "../thunks/auth.thunk";
-import { UserRole } from "packages/types/UserType";
+import { UserRole } from "packages/types/User";
 import { getUserInformationThunk } from "@store/thunks/user.thunk";
 
 type AuthState = {

@@ -1,4 +1,4 @@
-import { ModelNotificationProps } from "packages/types/modal";
+import { ModelNotificationProps } from "packages/types/ModelNotification";
 import CustomButton from "./buttons/CustomButton";
 
 export default function ModalNotification({

@@ -136,5 +136,11 @@
   "contact": "Liên hệ",
   "email_company_value": "support@gradeflow.io",
   "phone_number_company_value": "+84 123 456 789",
-  "copyright": "© 2026 GradeFlow. All rights reserved."
+  "copyright": "© 2026 GradeFlow. All rights reserved.",
+  "your_classes": "Lớp học của bạn",
+  "manage_classes": "Quản lý lớp học",
+  "view": "Xem",
+  "students": "Học sinh",
+  "assignments": "Bài tập",
+  "avg_score": "Điểm trung bình"
 }

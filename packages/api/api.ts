@@ -3,7 +3,7 @@ import { store } from '../store/src/store';
 import { logout } from '../store/src/slices/auth.slice';
 
 export const api = axios.create({
-    baseURL: 'http://localhost:8080/api/v1',
+    baseURL: 'http://localhost:8080',
     timeout: 10000,
 });
 
