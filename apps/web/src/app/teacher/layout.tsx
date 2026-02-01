@@ -1,4 +1,3 @@
-import Footer from "@/components/Footer";
 import TeacherSidebar from "@/components/teachers/Sidebar";
 
 const layout: React.FC<Readonly<{children: React.ReactNode}>> = ({ children }) => {
@@ -6,11 +5,10 @@ const layout: React.FC<Readonly<{children: React.ReactNode}>> = ({ children }) =
         <>
             <div className="d-flex">
                 <TeacherSidebar/>
-                <div className="p-2 flex-grow-1">
+                <div className="p-3 flex-grow-1 overflow-auto hide-scrollbar" style={{height: '100vh'}}>
                     {children}
                 </div>
             </div>
-            <Footer/>
         </>
     );
 };

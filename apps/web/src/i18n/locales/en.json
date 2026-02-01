@@ -142,5 +142,32 @@
   "view": "Xem",
   "students": "Học sinh",
   "assignments": "Bài tập",
-  "avg_score": "Điểm trung bình"
+  "avg_score": "Điểm trung bình",
+  "create_eclass": "Create EClass",
+  "display_name": "Display name",
+  "short_description": "Short description",
+  "description": "Description",
+  "cancel": "Cancel",
+  "submit": "Submit",
+  "editor": {
+    "bold": "Bold",
+    "italic": "Italic",
+    "underline": "Underline",
+    "font_size": "Font Size",
+    "small": "Small",
+    "normal": "Normal",
+    "large": "Large",
+    "align_left": "Align Left",
+    "align_center": "Align Center",
+    "align_right": "Align Right",
+    "bullet_list": "Bullet List",
+    "numbered+list": "Numbered List",
+    "heading1": "Heading 1",
+    "heading2": "Heading 2",
+    "heading3": "Heading 3",
+    "clear_formatting": "Clear Formatting",
+    "status": "Status",
+    "open": "Open",
+    "closed": "Closed"
+  }
 }

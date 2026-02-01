@@ -6,7 +6,7 @@ import { Plus, Search } from "lucide-react";
 
 import { eclassApi } from "@api";
 import { TeacherEClass } from "packages/types/TeacherEClass";
-import ClassTable from "@/components/teachers/class/ClassTable";
+import ClassTable from "@/components/teachers/eclass/ClassTable";
 import ClassPagination from "@/components/Pagination";
 
 export default function TeacherClassesPage() {
@@ -42,10 +42,10 @@ export default function TeacherClassesPage() {
             {t("class_management_description")}
           </p>
         </div>
-          <button className="btn btn-primary d-inline-flex align-items-center gap-2 shadow-sm mt-1 ms-3">
-          <Plus size={16} />
-          {t("create_class")}
-        </button>
+          <a href="eclass/create" className="btn btn-primary d-inline-flex align-items-center gap-2 shadow-sm mt-1 ms-3">
+            <Plus size={16} />
+            {t("create_class")}
+          </a>
       </div>
 
       {/* Toolbar */}

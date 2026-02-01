@@ -46,7 +46,7 @@ export default function TeacherSidebar({ notificationCount = 0 }: Props) {
         </li>
 
         <li className="nav-item">
-          <Link href="/teacher/class" className={navLinkClass("/teacher/class")}>
+          <Link href="/teacher/eclass" className={navLinkClass("/teacher/eclass")}>
             <i className="bi bi-journal-bookmark fs-5" />
             {t("classes")}
           </Link>

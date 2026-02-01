@@ -31,3 +31,40 @@ body {
 [data-bs-theme="dark"] .login-card {
   background-color: #212529;
 }
+
+.hide-scrollbar {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
+
+.hide-scrollbar::-webkit-scrollbar {
+  display: none;  
+}
+
+.editor-content:empty:before {
+  content: attr(placeholder);
+  color: var(--bs-secondary-color);
+  opacity: 0.5;
+}
+.editor-content:focus {
+  outline: none;
+}
+.editor-content h1 {
+  font-size: 2rem;
+  font-weight: bold;
+  margin: 0.5rem 0; 
+}
+.editor-content h2 {
+  font-size: 1.5rem;
+  font-weight: bold;
+  margin: 0.5rem 0;
+}
+.editor-content h3 {
+  font-size: 1.25rem;
+  font-weight: bold;
+  margin: 0.5rem 0;
+}
+.editor-content ul, .editor-content ol {
+  margin: 0.5rem 0;
+  padding-left: 2rem;
+}
