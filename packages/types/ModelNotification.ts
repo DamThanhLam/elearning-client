@@ -17,4 +17,5 @@ export type ModelNotificationContextType = {
     modalProps: ModelNotificationProps;
     setModalProps: React.Dispatch<React.SetStateAction<ModelNotificationProps>>;
     buttonClose: Button;
+    handleClose: () => void;
 }

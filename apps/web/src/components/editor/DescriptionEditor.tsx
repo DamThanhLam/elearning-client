@@ -9,7 +9,6 @@ import {
   AlignRight,
   List,
   ListOrdered,
-  Type,
   Eraser
 } from 'lucide-react';
 

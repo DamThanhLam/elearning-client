@@ -3,28 +3,42 @@ import CustomButton from "./buttons/CustomButton";
 
 export default function ModalNotification({
   visible,
-  params
-}: ModelNotificationProps) {
+  params,
+  theme = 'light',
+}: ModelNotificationProps & { theme?: 'light' | 'dark' }) {
   if (!visible) return null;
 
   return (
-    <div className="fixed inset-0 z-50 flex items-center justify-center bg-black bg-opacity-50">
-      <div className="w-11/12 max-w-md bg-white rounded-lg p-6 shadow-lg">
-        <h2 className="text-lg font-bold mb-4">{params.title}</h2>
+    <>
+      <div className="modal-backdrop fade show" data-bs-theme={theme}></div>
 
-        <p className="text-base mb-6">{params.content}</p>
-
-        <div className="flex justify-end gap-4">
-          {params.buttons.map((button) => (
-            <CustomButton
-              type={button.type}
-              onPress={() => {
-                button.onPress();
-              }}
-            />
-          ))}
+      <div
+        className="modal fade show"
+        style={{ display: 'block' }}
+        tabIndex={-1}
+        data-bs-theme={theme}
+        role="dialog"
+      >
+        <div className="modal-dialog modal-dialog-centered modal-md">
+          <div className="modal-content border-0 shadow-lg">
+            <div className="modal-header border-0 pb-0">
+              <h2 className="modal-title fs-5 fw-bold">{params.title || "Xác nhận"}</h2>
+            </div>
+            <div className="modal-body pt-2">
+              <p className="mb-4">{params.content}</p>
+              <div className="d-flex justify-content-end gap-3">
+                {params.buttons.map((button, index) => (
+                  <CustomButton
+                    key={index}
+                    type={button.type}
+                    onPress={() => button.onPress?.()}
+                  />
+                ))}
+              </div>
+            </div>
+          </div>
         </div>
       </div>
-    </div>
+    </>
   );
 }

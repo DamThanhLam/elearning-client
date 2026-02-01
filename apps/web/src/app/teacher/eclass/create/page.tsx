@@ -2,30 +2,33 @@
 
 import { DescriptionEditor } from '@/components/editor/DescriptionEditor';
 import { StatusSelect } from '@/components/StatusSelect';
+import { CreateEClassRequest, eclassApi } from '@api/teacher.eclass.api';
+import { useModalNotification } from '@hooks';
+import { useRouter } from 'next/navigation';
 import { useState, FormEvent } from 'react';
 import { useTranslation } from 'react-i18next';
 
-interface FormData {
-  displayName: string;
-  shortDescription: string;
-  description: string;
-  status: string;
-}
 
 interface FormErrors {
   displayName?: string;
+  shortDescription?: string;
   description?: string;
+  status?: string;
 }
 
+const initialCreateEClassRequest: CreateEClassRequest = {
+  displayName: '',
+  shortDescription: '',
+  description: '',
+  status: 'OPEN'
+};
+
 const CreateEClassForm:React.FC = () => {
+  const router = useRouter();
   const { t } = useTranslation();
 
-  const [formData, setFormData] = useState<FormData>({
-    displayName: '',
-    shortDescription: '',
-    description: '',
-    status: 'OPEN'
-  });
+  const { setModalProps, buttonClose, handleClose } = useModalNotification();
+  const [formData, setFormData] = useState<CreateEClassRequest>(initialCreateEClassRequest);
 
   const [errors, setErrors] = useState<FormErrors>({});
   const [isSubmitting, setIsSubmitting] = useState(false);
@@ -34,15 +37,16 @@ const CreateEClassForm:React.FC = () => {
     const newErrors: FormErrors = {};
 
     if (!formData.displayName.trim()) {
-      newErrors.displayName = t('createEClass.validation.displayNameRequired');
+      newErrors.displayName = t('required');
     }
-
-    const tempDiv = document.createElement('div');
-    tempDiv.innerHTML = formData.description;
-    const textContent = tempDiv.textContent || tempDiv.innerText || '';
-
-    if (!textContent.trim()) {
-      newErrors.description = t('createEClass.validation.descriptionRequired');
+    if (!formData.description.trim()) {
+      newErrors.description = t('required');
+    }
+    if (!formData.status.trim()) {
+      newErrors.status = t('required');
+    }
+    if (!formData.shortDescription.trim()) {
+      newErrors.shortDescription = t('required');
     }
 
     setErrors(newErrors);
@@ -59,18 +63,17 @@ const CreateEClassForm:React.FC = () => {
     setIsSubmitting(true);
 
     try {
-      console.log('Submitting EClass:', formData);
-
-      await new Promise(resolve => setTimeout(resolve, 1000));
-
-      alert(t('createEClass.success'));
-
-      setFormData({
-        displayName: '',
-        shortDescription: '',
-        description: '',
-        status: 'OPEN'
+      await eclassApi.postEClass(formData);
+      setModalProps({
+        visible: true,
+        params: {
+          title: t('success'),
+          content: t('eclass_created_successfully'),
+          type: 'success',
+          buttons: [buttonClose]
+        }
       });
+      setFormData(initialCreateEClassRequest);
       setErrors({});
     } catch (error) {
       console.error('Error creating EClass:', error);
@@ -80,19 +83,30 @@ const CreateEClassForm:React.FC = () => {
   };
 
   const handleCancel = () => {
-    if (confirm('Are you sure you want to cancel? All changes will be lost.')) {
-      setFormData({
-        displayName: '',
-        shortDescription: '',
-        description: '',
-        status: 'OPEN'
+    setModalProps({
+        visible: true,
+        params: {
+          title: t('confirm'),
+          content: t('are_you_sure_you_want_to_cancel_all_changes_will_be_lost'),
+          type: 'warning',
+          buttons: [
+            buttonClose,
+            {
+              type: "YES",
+              onPress: () => {
+                setFormData(initialCreateEClassRequest),
+                setErrors({});
+                router.replace("/teacher/eclass");
+                handleClose();
+              }
+            }
+          ]
+        }
       });
-      setErrors({});
-    }
   };
 
   return (
-    <div className="shadow-sm">
+    <div>
         <h2 className="card-title mb-4">{t('create_eclass')}</h2>
 
         <form onSubmit={handleSubmit}>
@@ -119,12 +133,15 @@ const CreateEClassForm:React.FC = () => {
             </label>
             <textarea
               id="shortDescription"
-              className="form-control"
+              className={`form-control ${errors.shortDescription ? 'is-invalid' : ''}`}
               rows={3}
               placeholder={t('short_description')}
               value={formData.shortDescription}
               onChange={(e) => setFormData({ ...formData, shortDescription: e.target.value })}
             />
+            {errors.shortDescription && (
+              <div className="invalid-feedback">{errors.shortDescription}</div>
+            )}
           </div>
 
           <div className="mb-3">

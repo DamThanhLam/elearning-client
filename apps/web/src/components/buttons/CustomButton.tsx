@@ -26,7 +26,7 @@ const CustomButton: React.FC<Props> = ({ type, onPress }) => {
         fw-semibold
       `}
     >
-      {t("common." + type.toLowerCase())}
+      {t(type.toLowerCase())}
     </button>
   );
 };

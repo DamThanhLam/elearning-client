@@ -24,7 +24,7 @@ export const ModalNotificationProvider: React.FC<{ children: React.ReactNode }> 
         onPress: handleClose
     }
     return (
-        <ModelNotificationContext.Provider value={{modalProps, setModalProps, buttonClose}}>
+        <ModelNotificationContext.Provider value={{modalProps, setModalProps, buttonClose, handleClose}}>
             {children}
             <ModalNotification {...modalProps}/>
         </ModelNotificationContext.Provider>
