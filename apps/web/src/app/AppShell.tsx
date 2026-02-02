@@ -25,6 +25,10 @@ export default function AppShell({children}:{children: React.ReactNode}) {
     useEffect(() => {
         i18n.changeLanguage(language);
     }, [language, i18n]);
+
+    if (!theme) {
+        return <html><body></body></html>;
+    }
     return (
         <html data-bs-theme={theme}>
         <body>

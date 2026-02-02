@@ -58,7 +58,7 @@ export default function TeacherClassesPage() {
           <input
             value={search}
             onChange={(e) => setSearch(e.target.value)}
-            placeholder={t("search_class")}
+            placeholder={t("search_classes")}
             className="form-control ps-5"
           />
         </div>

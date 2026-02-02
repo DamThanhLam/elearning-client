@@ -174,5 +174,11 @@
   "yes": "Yes",
   "no": "No",
   "required": "This field is required",
-  "are_you_sure_you_want_to_cancel_all_changes_will_be_lost": "Are you sure you want to cancel? All changes will be lost."
+  "are_you_sure_you_want_to_cancel_all_changes_will_be_lost": "Are you sure you want to cancel? All changes will be lost.",
+  "create_class": "Create Class",
+  "class_management": "Class Management",
+  "class_management_description": "Create and manage your classes effectively.",
+  "search_classes": "Search classes...",
+  "no_class_found": "No class found.",
+  "eclass_created_successfully": "EClass created successfully."
 }

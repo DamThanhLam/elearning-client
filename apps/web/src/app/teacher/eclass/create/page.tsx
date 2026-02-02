@@ -63,14 +63,20 @@ const CreateEClassForm:React.FC = () => {
     setIsSubmitting(true);
 
     try {
-      await eclassApi.postEClass(formData);
+      const response = await eclassApi.postEClass(formData);
       setModalProps({
         visible: true,
         params: {
           title: t('success'),
           content: t('eclass_created_successfully'),
           type: 'success',
-          buttons: [buttonClose]
+          buttons: [{
+            type: "CLOSE",
+            onPress: () => {
+              handleClose();
+              router.replace('/teacher/eclass/' + response.data);
+            }
+          }]
         }
       });
       setFormData(initialCreateEClassRequest);

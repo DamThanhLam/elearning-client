@@ -3,14 +3,14 @@
 import { useEffect, useState } from "react";
 
 const useTheme = () => {
-    const [theme, setTheme] = useState<'light' | 'dark'>('light');
+    const [theme, setTheme] = useState('');
 
     const toggleTheme = () => {
         setTheme((prevTheme) => (prevTheme === 'light' ? 'dark' : 'light'));
     };
 
     useEffect(() => {
-        const savedTheme = localStorage.getItem("theme") as "light" | "dark" | null;
+        const savedTheme = localStorage.getItem("theme") as "light" | "dark";
         if (savedTheme) {
             setTheme(savedTheme);
         }
