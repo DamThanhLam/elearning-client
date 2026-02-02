@@ -180,5 +180,9 @@
   "class_management_description": "Create and manage your classes effectively.",
   "search_classes": "Search classes...",
   "no_class_found": "No class found.",
-  "eclass_created_successfully": "EClass created successfully."
+  "eclass_created_successfully": "EClass created successfully.",
+  "more_options": "More options",
+  "view_detail": "View detail",
+  "edit": "Edit",
+  "updated_at": "Updated at"
 }

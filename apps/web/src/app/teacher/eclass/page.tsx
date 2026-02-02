@@ -1,35 +1,59 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import { useCallback, useEffect, useState } from "react";
 import { useTranslation } from "react-i18next";
 import { Plus, Search } from "lucide-react";
 
 import { eclassApi } from "@api";
-import { TeacherEClass } from "packages/types/TeacherEClass";
-import ClassTable from "@/components/teachers/eclass/ClassTable";
-import ClassPagination from "@/components/Pagination";
+import { useRouter } from "next/navigation";
+import { EClass } from "@packages/types/EClass";
+import { InfiniteGridList } from "@/components/cards/InfiniteGridList";
+import { EClassCard } from "@/components/cards/EClassCard";
+import { onEdit, onToggleStatus, onViewDetail } from "@/styles/EClass";
 
 export default function TeacherClassesPage() {
   const { t } = useTranslation();
-  const [eclasses, setEClasses] = useState<TeacherEClass[]>([]);
+  const router = useRouter();
+  const [eclasses, setEClasses] = useState<EClass[]>([]);
   const [search, setSearch] = useState("");
-  const [eclassPageToken, setEClassPageToken] = useState<any>({});
+  const [eclassPageToken, setEClassPageToken] = useState<any>({
+    nextPageToken: undefined,
+    hasNext: true,
+  });
+  const [loading, setLoading] = useState(false);
+  const [hasMore, setHasMore] = useState(true);
+  const [initialLoading, setInitialLoading] = useState(true);
 
-  const loadEClasses = async (type?: "next" | "previous") => {
-    const res = await eclassApi.getEClasses({
-      displayName: search,
-      nextPageToken: type === "next" ? eclassPageToken.nextPageToken : undefined,
-      previousPageToken: type === "previous" ? eclassPageToken.previousPageToken : undefined,
-    });
+  const loadMoreEClasses = useCallback(async () => {
+    if (loading || !eclassPageToken.hasNext) return;
 
-    setEClasses(res.data.items);
-    setEClassPageToken(res.data);
-  };
+    setLoading(true);
+    try {
+      const result = await eclassApi.getEClasses({
+        displayName: search,
+        nextPageToken: eclassPageToken.nextPageToken
+      });
+      setEClasses((prev) => [...prev, ...result.data.items]);
+      setEClassPageToken({
+        nextPageToken: result.data.nextPageToken,
+        hasNext: result.data.hasNext,
+      });
+      setHasMore(result.data.hasNext);
+    } finally {
+      setLoading(false);
+      setInitialLoading(false);
+    }
+  }, [search, loading, eclassPageToken]);
 
   useEffect(() => {
-    loadEClasses();
-  }, [search]);
+    setEClasses([]);
+    setEClassPageToken({ hasNext: true });
+    setHasMore(true);
+    setInitialLoading(true);
 
+    loadMoreEClasses();
+  }, [search]);
+ 
   return (
     <div className="container-fluid py-4">
       {/* Header */}
@@ -64,20 +88,27 @@ export default function TeacherClassesPage() {
         </div>
       </div>
 
-      {/* Table */}
-      <div className="card shadow-sm border-0">
-        <div className="card-body p-0">
-          <ClassTable items={eclasses} />
-        </div>
-      </div>
-
-      {/* Pagination */}
-      <ClassPagination
-        hasNext={eclassPageToken.hasNext}
-        hasPrevious={eclassPageToken.hasPrevious}
-        onNext={() => loadEClasses("next")}
-        onPrevious={() => loadEClasses("previous")}
+      <InfiniteGridList<EClass>
+        items={eclasses}
+        loading={loading}
+        hasMore={hasMore}
+        initialLoading={initialLoading}
+        loadMore={loadMoreEClasses}
+        renderItem={(eclass) => (
+          <EClassCard
+            key={eclass.id}
+            eclass={eclass}
+            actions={{
+              onViewDetail: onViewDetail,
+              onEdit: onEdit,
+              onToggleStatus: onToggleStatus,
+            }}
+          />
+        )}
+        emptyTitle={t('eclass.empty.title')}
+        emptyDescription={t('eclass.empty.description')}
       />
+
     </div>
   );
 }

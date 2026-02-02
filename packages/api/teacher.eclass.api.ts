@@ -23,4 +23,6 @@ export const eclassApi = {
         }),
     postEClass: async (data: CreateEClassRequest) => 
         api.post("/eclasses/api/v1/teachers/me/eclasses", data),
+    updateEClassStatus: async (id: string, status: string) => 
+        api.put(`/eclasses/api/v1/teachers/me/eclasses/${id}/status`, { status }),
 }

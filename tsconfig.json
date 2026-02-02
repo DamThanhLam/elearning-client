@@ -12,6 +12,10 @@
 
       "@hooks": ["packages/hooks/index.ts"],
       "@hooks/*": ["packages/hooks/*"],
+
+      "@utils/*": ["packages/utils/*"],
+
+      "@packages/types/*": ["packages/types/*"]
     },
     "jsx": "react-jsx",
     "moduleResolution": "node",
