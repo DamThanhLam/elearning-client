@@ -15,7 +15,7 @@ type SortBy = 'startAt' | 'dueAt' | 'status';
 function AssignmenList(){
     const { t } = useTranslation();
     const router = useRouter();
-    const eclassId = useParams().id as string;
+    const eclassId = useParams().eclassId as string;
     const [sortBy, setSortBy] = useState<SortBy>('dueAt');
     const [assignments, setAssignments] = useState<Assignment[]>([]);
     const [assignmentPageToken, setAssignmentPageToken] = useState({
@@ -66,13 +66,13 @@ function AssignmenList(){
         <div className="d-flex justify-content-between align-items-center mb-3">
             <h5 className="mb-0">{t('assignments')}</h5>
             <Button
-            variant="primary"
-            size="sm"
-            onClick={() => {router.push('assignments/create')}}
-            className="d-flex align-items-center gap-2"
-            >
-            <Plus size={18} />
-            {t('create_assignment')}
+                    variant="primary"
+                    size="sm"
+                    onClick={() => {router.push(`${eclassId}/assignment/create`)}}
+                    className="d-flex align-items-center gap-2"
+                >
+                <Plus size={18} />
+                {t('create_assignment')}
             </Button>
         </div>
 

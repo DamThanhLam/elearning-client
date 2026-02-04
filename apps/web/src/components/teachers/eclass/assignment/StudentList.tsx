@@ -8,11 +8,12 @@ import { useParams, useRouter } from "next/navigation";
 import { eclassMemberApi } from "@api";
 import { EClassMember } from "@packages/types/EClassMember";
 import StudentItem from "./StudentItem";
+import StudentOffcanvas from "../StudentOffcanvas";
 
 function StudentList(){
     const { t } = useTranslation();
     const router = useRouter();
-    const eclassId = useParams().id as string;
+    const eclassId = useParams().eclassId as string;
     const [searchTerm, setSearchTerm] = useState('');
     const [students, setStudents] = useState<EClassMember[]>([]);
     const [studentPageToken, setStudentPageToken] = useState({
@@ -22,6 +23,7 @@ function StudentList(){
     const [loading, setLoading] = useState(false);
     const [initialLoading, setInitialLoading] = useState(true);
     const [hasMore, setHasMore] = useState(true);
+    const [selectedStudent, setSelectedStudent] = useState<EClassMember | null>(null);
     
     const loadMoreEClasses = useCallback(async () => {
         if (loading || !studentPageToken.hasNext) return;
@@ -84,7 +86,7 @@ function StudentList(){
                 renderItem={(student) => (
                 <StudentItem
                     student={student}
-                    onClick={(student) => {router.replace(`${eclassId}/students/${student.id}`)}}
+                    onClick={(student) => {setSelectedStudent(student)}}
                 />
                 )}
                 emptyTitle={''}
@@ -94,12 +96,11 @@ function StudentList(){
         </Card>
       </div>
 
-      {/* <StudentOffcanvas
+      <StudentOffcanvas
         isOpen={!!selectedStudent}
         student={selectedStudent}
-        stats={selectedStudent ? getStudentStats() : null}
         onClose={() => setSelectedStudent(null)}
-      /> */}
+      />
     </>
     );
 }

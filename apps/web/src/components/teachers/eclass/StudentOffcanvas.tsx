@@ -8,23 +8,21 @@ import { useState } from 'react';
 interface StudentOffcanvasProps {
   isOpen: boolean;
   student: EClassMember | null;
-  stats: StudentAssignmentStats | null;
   onClose: () => void;
 }
 
 export function StudentOffcanvas({
   isOpen,
   student,
-  stats,
   onClose,
 }: StudentOffcanvasProps) {
   const { t } = useTranslation();
-  const [showConfirm, setShowConfirm] = useState(false);
+  const[studentStatistics, setStudentStatistics] = useState<StudentAssignmentStats | null>(null);
 
-  if (!student || !stats) return null;
+  if (!student || !studentStatistics) return null;
 
   const completionPercentage = Math.round(
-    (stats.completed / stats.total) * 100
+    (studentStatistics.completed / studentStatistics.total) * 100
   ) || 0;
 
   const getStatusColor = (status: string) => {
@@ -107,19 +105,19 @@ export function StudentOffcanvas({
               <div className="col-6">
                 <div className="bg-light p-3 rounded-2 text-center">
                   <p className="text-muted small mb-2">{t('total')}</p>
-                  <h5 className="mb-0">{stats.total}</h5>
+                  <h5 className="mb-0">{studentStatistics.total}</h5>
                 </div>
               </div>
               <div className="col-6">
                 <div className="bg-success bg-opacity-10 p-3 rounded-2 text-center">
                   <p className="text-muted small mb-2">{t('completed')}</p>
-                  <h5 className="mb-0 text-success">{stats.completed}</h5>
+                  <h5 className="mb-0 text-success">{studentStatistics.completed}</h5>
                 </div>
               </div>
               <div className="col-6">
                 <div className="bg-warning bg-opacity-10 p-3 rounded-2 text-center">
                   <p className="text-muted small mb-2">{t('pending')}</p>
-                  <h5 className="mb-0 text-warning">{stats.pending}</h5>
+                  <h5 className="mb-0 text-warning">{studentStatistics.pending}</h5>
                 </div>
               </div>
             </div>

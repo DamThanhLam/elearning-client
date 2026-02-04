@@ -12,7 +12,7 @@ import { eclassApi } from '@api';
 
 function EClassDetailPage() {
     const param = useParams();
-    const eclassId = param.id as string;
+    const eclassId = param.eclassId as string;
     const router = useRouter();
     const [eclass, setEClass] = useState<EClass | null>(null);
     const [eclassStats, setEClassStats] = useState({

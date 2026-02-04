@@ -7,4 +7,6 @@ export const eclassAssignmentApi = {
                 ...params,
             }
         }),
+    addAssignment: async (eclassId: string, data: any) =>
+        api.post(`/eclasses/api/v1/teachers/me/eclasses/${eclassId}/assignments`, data),
 };
