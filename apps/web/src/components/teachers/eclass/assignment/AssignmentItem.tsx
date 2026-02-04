@@ -2,7 +2,7 @@ import { useTranslation } from 'react-i18next';
 import { Card, Badge, Button, Dropdown } from 'react-bootstrap';
 import { MoreVertical, AlertCircle, Calendar } from 'lucide-react';
 import { Assignment, AssignmentActions, AssignmentStatus } from '@packages/types/Assignment';
-import { formatDate, getDaysUntil, isDueSoon } from '@utils/Date';
+import { formatDate, formatDateTime, getDaysUntil, isDueSoon } from '@utils/Date';
 
 interface AssignmentItemProps {
   assignment: Assignment;
@@ -23,24 +23,24 @@ export function AssignmentItem({
   const isOverdue = daysUntilDue < 0;
 
   return (
-    <Card onClick={()=>{onViewDetail;}} className="border-0 shadow-sm mb-3 hover-lift transition-all">
+    <Card className="border-0 shadow-sm mb-3 hover-lift transition-all">
       <Card.Body>
         <div className="row align-items-start g-3">
-          <div className="col-md-7">
+          <div onClick={() => onViewDetail(assignment.id)} className="col-md-7">
             <div className="d-flex gap-2 align-items-start mb-2">
               <Badge
                 bg={isOpen ? 'primary' : 'secondary'}
                 className="mt-1"
               >
-                {t(`assignment.status.${isOpen ? 'open' : 'closed'}`)}
+                {t(`${isOpen ? 'open' : 'closed'}`)}
               </Badge>
               <Badge bg="light" text="dark" className="mt-1">
-                {t(`assignment.type.${assignment.type.toLowerCase()}`)}
+                {t(`${assignment.type.toLowerCase()}`)}
               </Badge>
               {isDueSoonFlag && (
                 <Badge bg="warning" className="mt-1 d-flex align-items-center gap-1">
                   <AlertCircle size={12} />
-                  {t('common.loading')}
+                  {t('loading')}
                 </Badge>
               )}
             </div>
@@ -53,11 +53,11 @@ export function AssignmentItem({
             <div className="d-flex flex-wrap gap-3 text-muted">
               <small className="d-flex align-items-center gap-1">
                 <Calendar size={14} />
-                {t('assignment.startAt')}: {formatDate(assignment.startAt)}
+                {t('start_at')}: {formatDateTime(assignment.startAt)}
               </small>
               <small className={`d-flex align-items-center gap-1 ${isDueSoonFlag || isOverdue ? 'text-danger' : ''}`}>
                 <Calendar size={14} />
-                {t('assignment.dueAt')}: {formatDate(assignment.dueAt)}
+                {t('due_at')}: {formatDateTime(assignment.dueAt)}
                 {daysUntilDue >= 0 && ` (${daysUntilDue}d)`}
                 {isOverdue && ' (OVERDUE)'}
               </small>
@@ -77,10 +77,10 @@ export function AssignmentItem({
                 </Dropdown.Toggle>
                 <Dropdown.Menu>
                   <Dropdown.Item onClick={() => actions.onEdit(assignment)}>
-                    {t('assignment.actions.edit')}
+                    {t('edit')}
                   </Dropdown.Item>
                   <Dropdown.Item onClick={() => actions.onToggleStatus(assignment)}>
-                    {t('assignment.actions.toggleStatus')}
+                    {t('toggle_status')}
                   </Dropdown.Item>
                   <Dropdown.Divider />
                 </Dropdown.Menu>

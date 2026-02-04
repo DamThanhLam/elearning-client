@@ -10,6 +10,7 @@ import { EClass } from "@packages/types/EClass";
 import { InfiniteGridList } from "@/components/cards/InfiniteGridList";
 import { EClassCard } from "@/components/cards/EClassCard";
 import { onEdit, onToggleStatus, onViewDetail } from "@/styles/EClass";
+import GridLayout from "@/components/layouts/GridLayout";
 
 export default function TeacherClassesPage() {
   const { t } = useTranslation();
@@ -94,6 +95,7 @@ export default function TeacherClassesPage() {
         hasMore={hasMore}
         initialLoading={initialLoading}
         loadMore={loadMoreEClasses}
+        layout={(items: React.ReactNode[]) => <GridLayout>{items}</GridLayout>}
         renderItem={(eclass) => (
           <EClassCard
             key={eclass.id}

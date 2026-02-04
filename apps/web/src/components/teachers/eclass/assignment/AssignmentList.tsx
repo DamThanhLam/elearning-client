@@ -1,7 +1,7 @@
 "use client";
 
 import { InfiniteGridList } from "@/components/cards/InfiniteGridList";
-import { Assignment } from "@packages/types/Assignment";
+import { Assignment, SORT_OPTIONS, SortBy } from "@packages/types/Assignment";
 import { useCallback, useEffect, useState } from "react";
 import { useTranslation } from "react-i18next";
 import AssignmentItem from "./AssignmentItem";
@@ -9,14 +9,14 @@ import { Button, Form } from "react-bootstrap";
 import { Plus } from "lucide-react";
 import { useParams, useRouter } from "next/navigation";
 import { eclassAssignmentApi } from "@api";
-
-type SortBy = 'startAt' | 'dueAt' | 'status';
+import ListLayout from "@/components/layouts/ListLayout";
+import { it } from "node:test";
 
 function AssignmenList(){
     const { t } = useTranslation();
     const router = useRouter();
     const eclassId = useParams().eclassId as string;
-    const [sortBy, setSortBy] = useState<SortBy>('dueAt');
+    const [sortBy, setSortBy] = useState<SortBy>('DUE_AT');
     const [assignments, setAssignments] = useState<Assignment[]>([]);
     const [assignmentPageToken, setAssignmentPageToken] = useState({
         nextPageToken: undefined,
@@ -34,6 +34,7 @@ function AssignmenList(){
             const result = await eclassAssignmentApi.getAssignments(
                 eclassId,
                 {
+                    sort: SORT_OPTIONS[sortBy],
                     nextPageToken: assignmentPageToken.nextPageToken,
                     limit: 15,
                 }
@@ -48,7 +49,7 @@ function AssignmenList(){
             setLoading(false);
             setInitialLoading(false);
         }
-    }, [sortBy, loading, assignmentPageToken, eclassId]);
+    }, [sortBy, loading, assignmentPageToken]);
 
     useEffect(() => {
         setAssignments([]);
@@ -87,9 +88,9 @@ function AssignmenList(){
                 onChange={(e) => setSortBy(e.target.value as SortBy)}
                 className="form-select-sm"
             >
-                <option value="dueAt">{t('sort_by_due_date')}</option>
-                <option value="startAt">{t('sort_by_start_date')}</option>
-                <option value="status">{t('sort_by_status')}</option>
+                <option value="DUE_AT">{t('sort_by_due_date')}</option>
+                <option value="START_AT">{t('sort_by_start_date')}</option>
+                <option value="STATUS">{t('sort_by_status')}</option>
             </Form.Select>
             </Form.Group>
         )}
@@ -97,6 +98,7 @@ function AssignmenList(){
             items={assignments}
             loading={loading}
             hasMore={hasMore}
+            layout={(items: React.ReactNode[]) => <ListLayout>{items}</ListLayout>}
             initialLoading={initialLoading}
             loadMore={loadMoreEClasses}
             renderItem={(assignment) => (

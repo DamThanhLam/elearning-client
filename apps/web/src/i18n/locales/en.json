@@ -236,5 +236,6 @@
   "assignment_create_fail_title": "Assignment Creation Failed",
   "assignment_create_fail_message": "There was an error creating the assignment. Please try again.",
   "assignment_create_cancel_title": "Cancel Assignment Creation",
-  "assignment_create_cancel_message": "Are you sure you want to cancel? All entered data will be lost."
+  "assignment_create_cancel_message": "Are you sure you want to cancel? All entered data will be lost.",
+  "toggle_status": "Toggle Status"
 }

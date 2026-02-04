@@ -7,6 +7,7 @@ interface InfiniteGridListProps<T> {
   initialLoading: boolean;
   loadMore: () => void;
   hasMore: boolean;
+  layout: any;
   renderItem: (item: T) => React.ReactNode;
   skeletonCount?: number;
   emptyTitle: string;
@@ -19,16 +20,13 @@ export function InfiniteGridList<T>({
   initialLoading,
   loadMore,
   hasMore,
+  layout,
   renderItem,
   skeletonCount = 6,
   emptyTitle,
   emptyDescription,
 }: InfiniteGridListProps<T>) {
   const observerTarget = useRef<HTMLDivElement>(null);
-
-  useEffect(() => {
-    loadMore();
-  }, []);
 
   useEffect(() => {
     const observer = new IntersectionObserver(
@@ -59,9 +57,7 @@ export function InfiniteGridList<T>({
 
   return (
     <>
-      <div className="row row-cols-1 row-cols-md-2 row-cols-lg-3 g-4">
-        {items.map(renderItem)}
-      </div>
+      {layout(items.map(renderItem))}
 
       <div ref={observerTarget} className="py-4 text-center">
         {loading && <div className="spinner-border" />}

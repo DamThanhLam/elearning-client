@@ -38,6 +38,7 @@ export function EClassCard({ eclass, actions }: EClassCardProps) {
           {/* Header */}
           <div className="d-flex align-items-start gap-3 mb-3">
             <img
+              onClick={() => actions.onViewDetail(eclass)}
               src={eclass.avatar.url}
               alt={eclass.displayName}
               className="rounded"
@@ -90,6 +91,7 @@ export function EClassCard({ eclass, actions }: EClassCardProps) {
 
           {/* Description */}
           <p
+            onClick={() => actions.onViewDetail(eclass)}
             className="card-text text-body-secondary mb-3"
             style={{
               display: '-webkit-box',
@@ -103,7 +105,7 @@ export function EClassCard({ eclass, actions }: EClassCardProps) {
           </p>
 
           {/* Footer */}
-          <div className="mt-auto">
+          <div onClick={() => actions.onViewDetail(eclass)} className="mt-auto">
             <div className="d-flex gap-3 mb-2">
               <div className="d-flex align-items-center gap-1">
                 <Users size={16} className="text-primary" />

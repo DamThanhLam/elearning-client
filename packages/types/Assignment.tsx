@@ -1,7 +1,6 @@
 
 export interface Assignment {
   id: string;
-  eclassId: string;
   displayName: string;
   shortDescription: string;
   type: AssignmentType;
@@ -25,6 +24,13 @@ export interface AssignmentActions {
   onEdit: (assignment: Assignment) => void;
   onToggleStatus: (assignment: Assignment) => void;
 }
+
+export type SortBy = 'START_AT' | 'DUE_AT' | 'STATUS';
+export const SORT_OPTIONS: Record<SortBy, string> = {
+  DUE_AT: 'dueAt,DESC',
+  START_AT: 'startAt,DESC',
+  STATUS: 'status,ASC',
+};
 
 export enum AssignmentCreateType {
   PROGRAMMING = 'PROGRAMMING',
