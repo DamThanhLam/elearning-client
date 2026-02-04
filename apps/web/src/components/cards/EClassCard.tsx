@@ -3,7 +3,7 @@ import { Users, FileText, MoreVertical } from 'lucide-react';
 import { Dropdown } from 'react-bootstrap';
 import { EClass, EClassCardActions, EClassStatus } from 'packages/types/EClass';
 import useTheme from '@hooks/useTheme';
-import formatDate from '@utils/Date';
+import formatRelativeTime from '@utils/Date';
 
 interface EClassCardProps {
   eclass: EClass;
@@ -12,7 +12,7 @@ interface EClassCardProps {
 
 export function EClassCard({ eclass, actions }: EClassCardProps) {
   const { t } = useTranslation();
-  const { theme } = useTheme(); // 'light' | 'dark'
+  const { theme } = useTheme();
 
   const statusBadgeClass =
     eclass.status === EClassStatus.OPEN ? 'bg-success' : 'bg-secondary';
@@ -121,7 +121,7 @@ export function EClassCard({ eclass, actions }: EClassCardProps) {
             </div>
 
             <small className="text-body-secondary">
-              {t('updated_at')}: {formatDate(eclass.updatedAt)}
+              {t('updated_at')}: {formatRelativeTime(eclass.updatedAt)}
             </small>
           </div>
         </div>

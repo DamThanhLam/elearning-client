@@ -1,0 +1,118 @@
+"use client";
+
+import { InfiniteGridList } from "@/components/cards/InfiniteGridList";
+import { Assignment } from "@packages/types/Assignment";
+import { useCallback, useEffect, useState } from "react";
+import { useTranslation } from "react-i18next";
+import AssignmentItem from "./AssignmentItem";
+import { Button, Form } from "react-bootstrap";
+import { Plus } from "lucide-react";
+import { useParams, useRouter } from "next/navigation";
+import { eclassAssignmentApi } from "@api";
+
+type SortBy = 'startAt' | 'dueAt' | 'status';
+
+function AssignmenList(){
+    const { t } = useTranslation();
+    const router = useRouter();
+    const eclassId = useParams().id as string;
+    const [sortBy, setSortBy] = useState<SortBy>('dueAt');
+    const [assignments, setAssignments] = useState<Assignment[]>([]);
+    const [assignmentPageToken, setAssignmentPageToken] = useState({
+        nextPageToken: undefined,
+        hasNext: true,
+    });
+    const [loading, setLoading] = useState(false);
+    const [initialLoading, setInitialLoading] = useState(true);
+    const [hasMore, setHasMore] = useState(true);
+    
+    const loadMoreEClasses = useCallback(async () => {
+        if (loading || !assignmentPageToken.hasNext) return;
+
+        setLoading(true);
+        try {
+            const result = await eclassAssignmentApi.getAssignments(
+                eclassId,
+                {
+                    nextPageToken: assignmentPageToken.nextPageToken,
+                    limit: 15,
+                }
+            );
+            setAssignments((prev) => [...prev, ...result.data.items]);
+            setAssignmentPageToken({
+                nextPageToken: result.data.nextPageToken,
+                hasNext: result.data.hasNext,
+            });
+            setHasMore(result.data.hasNext);
+        } finally {
+            setLoading(false);
+            setInitialLoading(false);
+        }
+    }, [sortBy, loading, assignmentPageToken, eclassId]);
+
+    useEffect(() => {
+        setAssignments([]);
+        setAssignmentPageToken({ 
+            hasNext: true,
+            nextPageToken: undefined
+         });
+        setHasMore(true);
+        setInitialLoading(true);
+
+        loadMoreEClasses();
+    }, [sortBy]);
+    return(
+    <div className="mb-5">
+        <div className="d-flex justify-content-between align-items-center mb-3">
+            <h5 className="mb-0">{t('assignments')}</h5>
+            <Button
+            variant="primary"
+            size="sm"
+            onClick={() => {router.push('assignments/create')}}
+            className="d-flex align-items-center gap-2"
+            >
+            <Plus size={18} />
+            {t('create_assignment')}
+            </Button>
+        </div>
+
+        {assignments.length > 0 && (
+            <Form.Group className="mb-3">
+            <Form.Label className="small text-muted">
+                {t('actions')}
+            </Form.Label>
+            <Form.Select
+                size="sm"
+                value={sortBy}
+                onChange={(e) => setSortBy(e.target.value as SortBy)}
+                className="form-select-sm"
+            >
+                <option value="dueAt">{t('sort_by_due_date')}</option>
+                <option value="startAt">{t('sort_by_start_date')}</option>
+                <option value="status">{t('sort_by_status')}</option>
+            </Form.Select>
+            </Form.Group>
+        )}
+        <InfiniteGridList<Assignment>
+            items={assignments}
+            loading={loading}
+            hasMore={hasMore}
+            initialLoading={initialLoading}
+            loadMore={loadMoreEClasses}
+            renderItem={(assignment) => (
+            <AssignmentItem
+                assignment={assignment}
+                actions={{
+                    onEdit: () => {},
+                    onToggleStatus: () => {},
+                }}
+                onViewDetail={(id) => {router.push(`assignments/${id}`)}}
+            />
+            )}
+            emptyTitle={''}
+            emptyDescription={''}
+        />
+    </div>
+    );
+}
+export default AssignmenList;
