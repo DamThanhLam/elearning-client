@@ -1,5 +1,7 @@
 "use client";
 
+"use client";
+
 import { useTranslation } from 'react-i18next';
 import { Container } from 'react-bootstrap';
 import { AssignmentFormData } from '@packages/types/Assignment';
@@ -8,27 +10,29 @@ import { eclassAssignmentApi } from '@api';
 import { useParams, useRouter } from 'next/navigation';
 import { useModalNotification } from '@hooks';
 
-export function CreateAssignmentPage() {
+export function UpdateAssignmentPage() {
   const { t } = useTranslation();
-  const eclassId = useParams().eclassId as string;
+  const params = useParams();
+  const eclassId = params.eclassId as string;
+  const assignmentId = params.assignmentId as string;
   const router = useRouter();
   const { buttonClose, handleClose, setModalProps } = useModalNotification();
 
   const handleSubmit = async (data: AssignmentFormData) => {
     try{
-      const response = await eclassAssignmentApi.addAssignment(eclassId, data);
+      await eclassAssignmentApi.updateAssignment(eclassId, assignmentId, data);
       setModalProps({
         visible: true,
         params: {
-          title: t('assignment_create_success_title'),
-          content: t('assignment_create_success_message'),
+          title: t('assignment_update_success_title'),
+          content: t('assignment_update_success_message'),
           type: 'success',
           buttons: [
             {
               type: 'CLOSE', 
               onPress: () => {
                 handleClose();
-                router.push(`${response.data}`); 
+                router.replace(`/teacher/eclass/${eclassId}/assignment/${assignmentId}`);
               }
             },
           ]
@@ -39,8 +43,8 @@ export function CreateAssignmentPage() {
       setModalProps({
         visible: true,
         params: {
-          title: t('assignment_create_fail_title'),
-          content: t('assignment_create_fail_message'),
+          title: t('assignment_update_fail_title'),
+          content: t('assignment_update_fail_message'),
           type: 'success',
           buttons: [buttonClose]
         }
@@ -53,8 +57,8 @@ export function CreateAssignmentPage() {
     setModalProps({
       visible: true,
       params: {
-        title: t('assignment_create_cancel_title'),
-        content: t('assignment_create_cancel_message'),
+        title: t('assignment_update_cancel_title'),
+        content: t('assignment_update_cancel_message'),
         type: 'info',
         buttons: [
           buttonClose,
@@ -62,7 +66,7 @@ export function CreateAssignmentPage() {
             type: 'YES', 
             onPress: () => {
               handleClose();
-              router.replace("../");
+              router.replace(`/teacher/eclass/${eclassId}`);
             }
           }
         ]
@@ -74,10 +78,12 @@ export function CreateAssignmentPage() {
     <div className="py-4" style={{ minHeight: '100vh' }}>
       <Container className="max-w-6xl mx-auto px-3">
         <div className="mb-5">
-          <h1 className="mb-2">{t('assignment_create_title')}</h1>
-          <p className="text-muted">{t('assignment_create_subtitle')}</p>
+          <h1 className="mb-2">{t('assignment_update_title')}</h1>
+          <p className="text-muted">{t('assignment_update_subtitle')}</p>
         </div>
         <AssignmentForm
+          eclassId={eclassId}
+          assignmentId={assignmentId}
           onSubmit={handleSubmit}
           onCancel={handleCancel}
         />
@@ -86,4 +92,4 @@ export function CreateAssignmentPage() {
   );
 }
 
-export default CreateAssignmentPage;
+export default UpdateAssignmentPage;

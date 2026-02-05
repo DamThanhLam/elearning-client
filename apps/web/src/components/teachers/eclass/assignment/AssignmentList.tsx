@@ -2,7 +2,7 @@
 
 import { InfiniteGridList } from "@/components/cards/InfiniteGridList";
 import { Assignment, SORT_OPTIONS, SortBy } from "@packages/types/Assignment";
-import { useCallback, useEffect, useState } from "react";
+import { use, useCallback, useEffect, useState } from "react";
 import { useTranslation } from "react-i18next";
 import AssignmentItem from "./AssignmentItem";
 import { Button, Form } from "react-bootstrap";
@@ -25,12 +25,16 @@ function AssignmenList(){
     const [loading, setLoading] = useState(false);
     const [initialLoading, setInitialLoading] = useState(true);
     const [hasMore, setHasMore] = useState(true);
+    const [refreshLoadMoreAssignment, setRefreshLoadMoreAssignment] = useState(false);
     
-    const loadMoreEClasses = useCallback(async () => {
+    const loadMoreAssignment = useCallback(async () => {
+        console.log('loading', loading);
+        console.log('assignmentPageToken', assignmentPageToken);
         if (loading || !assignmentPageToken.hasNext) return;
 
         setLoading(true);
         try {
+            console.log('Loading assignments...');
             const result = await eclassAssignmentApi.getAssignments(
                 eclassId,
                 {
@@ -45,6 +49,8 @@ function AssignmenList(){
                 hasNext: result.data.hasNext,
             });
             setHasMore(result.data.hasNext);
+        } catch (error) {
+            console.error('Failed to load assignments:', error);
         } finally {
             setLoading(false);
             setInitialLoading(false);
@@ -56,12 +62,20 @@ function AssignmenList(){
         setAssignmentPageToken({ 
             hasNext: true,
             nextPageToken: undefined
-         });
+        });
         setHasMore(true);
         setInitialLoading(true);
-
-        loadMoreEClasses();
+        loadMoreAssignment();
+        setRefreshLoadMoreAssignment(true);
     }, [sortBy]);
+
+    useEffect(() => {
+        if (refreshLoadMoreAssignment) {
+            loadMoreAssignment().then(() => {
+                setRefreshLoadMoreAssignment(false);
+            });
+        }
+    }, [refreshLoadMoreAssignment]);
     return(
     <div className="mb-5">
         <div className="d-flex justify-content-between align-items-center mb-3">
@@ -100,15 +114,15 @@ function AssignmenList(){
             hasMore={hasMore}
             layout={(items: React.ReactNode[]) => <ListLayout>{items}</ListLayout>}
             initialLoading={initialLoading}
-            loadMore={loadMoreEClasses}
+            loadMore={loadMoreAssignment}
             renderItem={(assignment) => (
             <AssignmentItem
                 assignment={assignment}
                 actions={{
-                    onEdit: () => {},
+                    onEdit: (assignment) => {router.push(`${eclassId}/assignment/${assignment.id}/update`)},
                     onToggleStatus: () => {},
                 }}
-                onViewDetail={(id) => {router.push(`assignments/${id}`)}}
+                onViewDetail={(id) => {router.push(`${eclassId}/assignments/${id}`)}}
             />
             )}
             emptyTitle={''}

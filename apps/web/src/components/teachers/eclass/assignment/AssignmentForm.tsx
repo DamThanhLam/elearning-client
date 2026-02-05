@@ -1,4 +1,4 @@
-import { useState, useCallback } from 'react';
+import { useState, useCallback, useEffect } from 'react';
 import { useTranslation } from 'react-i18next';
 import { Form, Button, Card, Alert } from 'react-bootstrap';
 import { ChevronLeft, Save } from 'lucide-react';
@@ -13,9 +13,11 @@ import {
 import AssignmentCommonFields from './AssignmentCommonFields';
 import MultipleQuestionAssignmentFields from './MultipleQuestionAssignmentFields';
 import ProgrammingAssignmentFields from './ProgrammingAssignmentFields';
+import { eclassAssignmentApi } from '@api';
 
 interface AssignmentFormProps {
-  eclassId: string;
+  eclassId?: string;
+  assignmentId?: string;
   onSubmit: (data: AssignmentFormData) => Promise<void>;
   onCancel: () => void;
 }
@@ -48,6 +50,7 @@ interface FormErrors {
 
 export function AssignmentForm({
   eclassId,
+  assignmentId,
   onSubmit,
   onCancel,
 }: AssignmentFormProps) {
@@ -66,7 +69,27 @@ export function AssignmentForm({
   });
   const [errors, setErrors] = useState<Record<string, string>>({});
   const [isSubmitting, setIsSubmitting] = useState(false);
-  const [submitError, setSubmitError] = useState('');
+
+  useEffect(() => {
+    if (eclassId && assignmentId) {
+      eclassAssignmentApi.getAssignment(eclassId, assignmentId)
+        .then((response) => {
+          const data = response.data;
+          setFormData(prev => ({...prev,...data}));
+        })
+        .catch((error) => {
+          console.error('Error fetching assignment data:', error);
+        });
+      eclassAssignmentApi.getAssignmentDescription(eclassId, assignmentId)
+        .then((response) => {
+          const data = response.data;
+          setFormData(prev => ({...prev, description: data || ''}));
+        })
+        .catch((error) => {
+          console.error('Error fetching assignment description:', error);
+        });
+    }
+  }, [assignmentId, eclassId]);
 
   const validateForm = useCallback((): boolean => {
     const newErrors: Record<string, string> = {};

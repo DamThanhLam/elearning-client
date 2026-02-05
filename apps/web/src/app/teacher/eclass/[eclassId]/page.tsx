@@ -23,13 +23,13 @@ function EClassDetailPage() {
     });
 
     const handleEditClass = () => {
-        router.replace(`edit/${eclassId}`)
+        router.replace(`${eclassId}/update`)
     };
 
     useEffect(() => {
       eclassApi.getEClassById(eclassId)
         .then((response) => {
-          setEClass(response.data);
+          setEClass({...response.data});
         });
       eclassApi.getEClassStatistics(eclassId)
         .then((response) => {

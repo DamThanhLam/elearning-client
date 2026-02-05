@@ -24,6 +24,7 @@ export default function TeacherClassesPage() {
   const [loading, setLoading] = useState(false);
   const [hasMore, setHasMore] = useState(true);
   const [initialLoading, setInitialLoading] = useState(true);
+  const [refreshLoadMoreEClasses, setRefreshLoadMoreEClasses] = useState(false);
 
   const loadMoreEClasses = useCallback(async () => {
     if (loading || !eclassPageToken.hasNext) return;
@@ -52,8 +53,16 @@ export default function TeacherClassesPage() {
     setHasMore(true);
     setInitialLoading(true);
 
-    loadMoreEClasses();
+    setRefreshLoadMoreEClasses(true);
   }, [search]);
+
+  useEffect(() => {
+    if (refreshLoadMoreEClasses) {
+      loadMoreEClasses().then(() => {
+        setRefreshLoadMoreEClasses(false);
+      });
+    }
+  }, [refreshLoadMoreEClasses]);
  
   return (
     <div className="container-fluid py-4">

@@ -7,8 +7,6 @@ export interface Assignment {
   startAt: number;
   dueAt: number;
   status: AssignmentStatus;
-  createdAt: number;
-  updatedAt: number;
 }
 export enum AssignmentType {
   PROGRAMMING = 'PROGRAMMING',

@@ -237,5 +237,27 @@
   "assignment_create_fail_message": "There was an error creating the assignment. Please try again.",
   "assignment_create_cancel_title": "Cancel Assignment Creation",
   "assignment_create_cancel_message": "Are you sure you want to cancel? All entered data will be lost.",
-  "toggle_status": "Toggle Status"
+  "toggle_status": "Toggle Status",
+  "eclass": {
+    "create": {
+      "error": "Error creating EClass.",
+      "error_content": "There was an issue creating your EClass. Please try again.",
+      "success": "EClass created successfully.",
+      "success_content": "Your new EClass is now ready. You can start adding content."
+    },
+    "update": {
+      "error": "Error updating EClass.",
+      "error_content": "There was an issue updating your EClass. Please try again.",
+      "success": "EClass updated successfully.",
+      "success_content": "Your EClass changes have been saved."
+    }
+  },
+  "assignment_update_success_title": "Assignment Updated",
+  "assignment_update_success_message": "The assignment has been updated successfully.",
+  "assignment_update_fail_title": "Assignment Update Failed",
+  "assignment_update_fail_message": "There was an error updating the assignment. Please try again",
+  "assignment_update_cancel_title": "Cancel Assignment Update",
+  "assignment_update_cancel_message": "Are you sure you want to cancel? All unsaved changes will be lost.",
+  "assignment_update_title": "Update Assignment",
+  "assignment_update_subtitle": "Modify the details of your assignment"
 }
